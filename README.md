@@ -9,25 +9,39 @@ yarn install
 
 ## File structure
 step157-2020
+
     |- client
+
         |-public
+
         |-src
+
     |-src
+
         |-main
+
             |-java
+
                 |-com
+
                     |-google
+
                         |-sps
+
                             |-servlets
+
             |-webapp
+
                 |-WEB_INF
+
     pom.xml
+    
     README.md
 
 ## Development
 ### Frontend
 If you will be primarily working on the frontend, then this setup should work better. Even if you will only briefly be working on the frontend, it's worth it to go through these steps.
-YOu will need two terminal sessions for this.
+You will need two terminal sessions for this.
 #### Terminal 1
 From the root folder (step157-2020), run the following:
 ```console
