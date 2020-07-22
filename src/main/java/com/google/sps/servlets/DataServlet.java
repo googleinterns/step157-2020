@@ -28,7 +28,6 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet to test set-up */
 @WebServlet("/api/data")
 public class DataServlet extends HttpServlet {
-  
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Gson gson = new Gson();
@@ -36,5 +35,4 @@ public class DataServlet extends HttpServlet {
     response.setContentType("application/json;");
     response.getWriter().println(gson.toJson("hi"));
   }
-
 }
