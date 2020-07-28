@@ -28,6 +28,6 @@ const authSlice = createSlice({
   },
 });
 
-export const {authenticate, deauthenticate, saveUserId, setError} =
+export const {authenticate, deauthenticate, setError} =
     authSlice.actions;
 export default authSlice.reducer;
