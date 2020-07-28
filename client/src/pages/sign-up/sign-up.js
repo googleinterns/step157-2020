@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
 
-import {authenticate} from '../authentication/auth-slice.js';
+import {authenticate} from '../../authentication/auth-slice.js';
 
 const SignUp = (props) => {
   const [email, setEmail] = useState('');
@@ -25,7 +25,6 @@ const SignUp = (props) => {
           Submit
         </button>
       </form>
-      <br />
     </div>
   );
 };
