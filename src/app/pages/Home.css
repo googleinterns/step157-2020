@@ -1,0 +1,50 @@
+.home-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 15%;
+    margin-top: 10%;
+}
+
+.home-text-container {
+    width: 60%;
+}
+.home-title {
+    font-size: 50px;
+    font-weight: 800;
+}
+.home-subtitle {
+    margin-top: 20px;
+    font-size: 25px;
+    opacity: .75;
+}
+
+.home-btn-container {
+    margin-top: 70px;
+}
+.home-btn {
+    padding: 15px 50px;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+    background-color: black;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+}
+.btn-signup {
+    margin-right: 20px;
+}
+.btn-explore {
+
+}
+
+.home-img-container {
+    width: 40%;
+}
+.home-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
