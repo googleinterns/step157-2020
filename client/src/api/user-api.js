@@ -13,21 +13,20 @@ const storeUserInDatabase = (id) => {
 
 export const createUser = (email, password) => {
   firebase.auth()
-    .createUserWithEmailAndPassword(email, password)
-    .then(() => firebase.auth().currentUser.uid)
-    .then((uid) => {
-      storeUserInDatabase(uid);
-      return uid;
-    })
-    .catch((error) => error);
+      .createUserWithEmailAndPassword(email, password)
+      .then(() => firebase.auth().currentUser.uid)
+      .then((uid) => {
+        storeUserInDatabase(uid);
+      })
+      .catch((error) => error);
 };
 
 export const signInUser = (email, password) => {
   firebase.auth()
-    .signInWithEmailAndPassword(email, password)
-    .then(() => firebase.auth().currentUser.uid)
-    .then((uid) => uid)
-    .catch((error) => error);
+      .signInWithEmailAndPassword(email, password)
+      .then(() => firebase.auth().currentUser.uid)
+      .then((uid) => uid)
+      .catch((error) => error);
 };
 
 export const signOutUser = () => {
