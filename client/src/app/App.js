@@ -21,6 +21,7 @@ const App = () => (
     <Route exact path="/team" component={Team} />
     <Route exact path="/signin" component={SignIn} />
     <Route exact path="/signup" component={SignUp} />
+    <Route exact path="/subskills" component={SubSkill} />
   </Router>
 );
 
