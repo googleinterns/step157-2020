@@ -17,7 +17,12 @@ const SignIn = (props) => {
           placeholder="email"
           onChange={(event) => { setEmail(event.target.value); }}
         />
-        <input type='password' name='password' placeholder='password' onChange={(event) => { setPassword(event.target.value); }}/>
+        <input
+          type='password'
+          name='password'
+          placeholder='password'
+          onChange={(event) => { setPassword(event.target.value); }}
+        />
         <button
           type="button"
           onClick={() => { props.authenticate({email, password, newUser: false}); }}
