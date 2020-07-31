@@ -18,7 +18,7 @@ export const createUser = (email, password) => {
       .then((uid) => {
         storeUserInDatabase(uid);
       })
-      .catch((error) => error);
+      .catch((ignore) => {});
 };
 
 export const signInUser = (email, password) => {
@@ -26,9 +26,9 @@ export const signInUser = (email, password) => {
       .signInWithEmailAndPassword(email, password)
       .then(() => firebase.auth().currentUser.uid)
       .then((uid) => uid)
-      .catch((error) => error);
+      .catch((ignore) => {});
 };
 
 export const signOutUser = () => {
-  firebase.auth().signOut().then(() => {}).catch((error) => error);
+  firebase.auth().signOut().then(() => {}).catch((ignore) => {});
 };
