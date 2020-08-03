@@ -4,10 +4,8 @@ import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
 
 import './App.css';
 
-// Components
 import Navbar from './components/Navbar.js';
 
-// Pages
 import Home from './pages/Home.js';
 import Explore from './pages/Explore.js';
 import Team from './pages/Team.js';
