@@ -1,4 +1,6 @@
 import firebase from '../firebase.js';
+import {setError, authenticate, deauthenticate} from '../authentication/auth-slice.js';
+import {store} from '../index.js';
 
 const storeUserInDatabase = (id) => {
   const user = {
@@ -17,18 +19,31 @@ export const createUser = (email, password) => {
       .then(() => firebase.auth().currentUser.uid)
       .then((uid) => {
         storeUserInDatabase(uid);
+        store.dispatch(authenticate());
+        store.dispatch(setError(null));
       })
-      .catch((ignore) => {});
+      .catch((error) => {
+        store.dispatch(setError(error.message));
+      });
 };
 
 export const signInUser = (email, password) => {
   firebase.auth()
       .signInWithEmailAndPassword(email, password)
       .then(() => firebase.auth().currentUser.uid)
-      .then((uid) => uid)
-      .catch((ignore) => {});
+      .then(() => {
+        store.dispatch(authenticate());
+        store.dispatch(setError(null));
+      })
+      .catch((error) => {
+        store.dispatch(setError(error.message));
+      });
 };
 
 export const signOutUser = () => {
-  firebase.auth().signOut().then(() => {}).catch((ignore) => {});
+  firebase.auth().signOut().then(() => {
+    store.dispatch(deauthenticate());
+  }).catch((error) => {
+    store.dispatch(setError(error.message));
+  });
 };
