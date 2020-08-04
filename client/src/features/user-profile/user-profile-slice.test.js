@@ -1,6 +1,6 @@
-import profileReducer, {fetchUserProfileById} from './user-profile-slice.js';
+import profileReducer, {fetchUserProfileById, updateUserProfile} from './user-profile-slice.js';
 
-const id = '12345';
+let id;
 
 describe('fetch user profile by id', () => {
   it('should fire an action to get a user profile', () => {

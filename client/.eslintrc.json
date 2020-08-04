@@ -12,9 +12,13 @@
   "extends": [ "eslint:recommended", "airbnb"],
   "rules": {
     "import/extensions": 0,
+    "import/order": 2,
     "no-console": 0,
     "no-multi-spaces": 0,
+    "no-param-reassign": [2, { "props": false }],
+    "object-curly-spacing": 0,
     "react/jsx-filename-extension": 0,
+    "react/prop-types": 0,
     "require-jsdoc": 0,
     "valid-jsdoc": 0
   },
@@ -30,6 +34,7 @@
       }
   },
   "plugins": [
+      "import",
       "react",
       "react-hooks"
   ]

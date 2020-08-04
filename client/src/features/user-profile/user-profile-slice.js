@@ -10,11 +10,12 @@ export const fetchUserProfileById = createAsyncThunk(
 );
 
 const initialState = {
-  id: null,
+  id: 'F9SNj9urfgV3qeoWTymWjrGE0Gm1',
   userProfile: {
-    name: null,
-    age: null,
-    bio: null,
+    photoUrl: '',
+    name: '',
+    age: '',
+    bio: '',
     skillsToTeach: [],
     skillsToLearn: [],
   },
@@ -22,7 +23,7 @@ const initialState = {
 };
 
 const profileSlice = createSlice({
-  name: 'userProfile',
+  name: 'user',
   initialState,
   reducers: {
     updateUserProfile(state, action) {

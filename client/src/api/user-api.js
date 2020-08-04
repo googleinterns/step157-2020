@@ -42,3 +42,10 @@ export const fetchUser = async (id) => {
 export const updateUser = (id, userProfile) => {
   firebase.database().ref('users').child(id).update(userProfile);
 };
+
+export const uploadProfilePicture = async (id, file) => {
+  const profileReference = firebase.storage().ref('images').child(`${id}/profile`);
+  await profileReference.put(file);
+  const url = await profileReference.getDownloadURL();
+  return url;
+};

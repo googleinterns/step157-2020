@@ -1,9 +1,16 @@
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/database';
+import 'firebase/storage';
+
+const databaseURL = process.env.NODE_ENV === 'development'
+  ? 'http://localhost:9000?ns=step-xchange'
+  : 'https://step-xchange.firebaseio.com';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBa5qLWxsRvG8IvdraOZK3XUPTfB-iuCXk',
   authDomain: 'step-xchange.firebaseapp.com',
-  databaseURL: 'https://step-xchange.firebaseio.com',
+  databaseURL,
   projectId: 'step-xchange',
   storageBucket: 'step-xchange.appspot.com',
   messagingSenderId: '480097212678',
@@ -12,6 +19,5 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-firebase.analytics();
 
 export default firebase;
