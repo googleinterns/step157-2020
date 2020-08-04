@@ -1,6 +1,6 @@
 import firebase from '../firebase.js';
 
-const storeUserInDatabase = (id) => {
+const storeNewUserInDatabase = (id) => {
   const user = {
     name: '',
     age: '',
@@ -11,27 +11,26 @@ const storeUserInDatabase = (id) => {
   firebase.database().ref('users').child(id).set(user);
 };
 
-export const createUser = (email, password, callback) => {
+export const createUser = (email, password) => {
   firebase.auth()
     .createUserWithEmailAndPassword(email, password)
-    .then((userCredential) => userCredential.user.uid)
+    .then(() => firebase.auth().currentUser.uid)
     .then((uid) => {
-      storeUserInDatabase(uid);
-      callback(uid);
+      storeNewUserInDatabase(uid);
     })
-    .catch((error) => error);
+    .catch(() => {});
 };
 
-export const signInUser = (email, password, callback) => {
+export const signInUser = (email, password) => {
   firebase.auth()
     .signInWithEmailAndPassword(email, password)
     .then(() => firebase.auth().currentUser.uid)
-    .then((uid) => { callback(uid); })
-    .catch((error) => error);
+    .then((uid) => uid)
+    .catch(() => {});
 };
 
 export const signOutUser = () => {
-  firebase.auth().signOut().then(() => {}).catch((error) => error);
+  firebase.auth().signOut().then(() => {}).catch(() => {});
 };
 
 export const fetchUser = async (id) => {
