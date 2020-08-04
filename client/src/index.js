@@ -1,5 +1,3 @@
-import './index.css';
-
 import {configureStore} from '@reduxjs/toolkit';
 import React from 'react';
 import ReactDOM from 'react-dom';

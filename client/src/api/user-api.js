@@ -5,6 +5,7 @@ const storeNewUserInDatabase = (id) => {
     name: '',
     age: '',
     bio: '',
+    photoUrl: '',
     skillsToTeach: [''],
     skillsToLearn: [''],
   };
@@ -34,7 +35,7 @@ export const signOutUser = () => {
 };
 
 export const fetchUser = async (id) => {
-  const snapshot = await firebase.database().ref('users').child(id).once('value');
+  const snapshot =      await firebase.database().ref('users').child(id).once('value');
   return snapshot.val();
 };
 
@@ -43,7 +44,7 @@ export const updateUser = (id, userProfile) => {
 };
 
 export const uploadProfilePicture = async (id, file) => {
-  const profileReference = firebase.storage().ref('images').child(`${id}/profile`);
+  const profileReference =      firebase.storage().ref('images').child(`${id}/profile`);
   await profileReference.put(file);
   const url = await profileReference.getDownloadURL();
   return url;

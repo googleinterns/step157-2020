@@ -18,9 +18,9 @@ const SignUp = (props) => {
           onChange={(event) => { setEmail(event.target.value); }}
         />
         <input
-          type='password'
-          name='password'
-          placeholder='password'
+          type="password"
+          name="password"
+          placeholder="password"
           onChange={(event) => { setPassword(event.target.value); }}
         />
         <button
