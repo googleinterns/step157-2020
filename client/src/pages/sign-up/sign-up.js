@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
-import {connect} from 'react-redux';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 
-import {authenticate} from '../../authentication/auth-slice.js';
+import { authenticate } from '../../authentication/auth-slice.js';
 
 const SignUp = (props) => {
   const [email, setEmail] = useState('');
@@ -18,14 +18,14 @@ const SignUp = (props) => {
           onChange={(event) => { setEmail(event.target.value); }}
         />
         <input
-          type='password'
-          name='password'
-          placeholder='password'
+          type="password"
+          name="password"
+          placeholder="password"
           onChange={(event) => { setPassword(event.target.value); }}
         />
         <button
           type="button"
-          onClick={() => { props.authenticate({email, password, newUser: true}); }}
+          onClick={() => { props.authenticate({ email, password, newUser: true }); }}
         >
           Submit
         </button>
@@ -34,4 +34,4 @@ const SignUp = (props) => {
   );
 };
 
-export default connect(null, {authenticate})(SignUp);
+export default connect(null, { authenticate })(SignUp);
