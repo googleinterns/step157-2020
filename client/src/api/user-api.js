@@ -1,6 +1,6 @@
+import { authenticate, deauthenticate, setError } from '../authentication/auth-slice.js';
 import firebase from '../firebase.js';
-import {setError, authenticate, deauthenticate} from '../authentication/auth-slice.js';
-import {store} from '../index.js';
+import { store } from '../index.js';
 
 const storeUserInDatabase = (id) => {
   const user = {
@@ -15,35 +15,39 @@ const storeUserInDatabase = (id) => {
 
 export const createUser = (email, password) => {
   firebase.auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(() => firebase.auth().currentUser.uid)
-      .then((uid) => {
-        storeUserInDatabase(uid);
-        store.dispatch(authenticate());
-        store.dispatch(setError(null));
-      })
-      .catch((error) => {
-        store.dispatch(setError(error.message));
-      });
+    .createUserWithEmailAndPassword(email, password)
+    .then(() => firebase.auth().currentUser.uid)
+    .then((uid) => {
+      storeUserInDatabase(uid);
+      store.dispatch(authenticate());
+      store.dispatch(setError(null));
+    })
+    .catch((error) => {
+      store.dispatch(setError(error.message));
+    });
 };
 
 export const signInUser = (email, password) => {
   firebase.auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(() => firebase.auth().currentUser.uid)
-      .then(() => {
-        store.dispatch(authenticate());
-        store.dispatch(setError(null));
-      })
-      .catch((error) => {
-        store.dispatch(setError(error.message));
-      });
+    .signInWithEmailAndPassword(email, password)
+    .then(() => firebase.auth().currentUser.uid)
+    .then(() => {
+      store.dispatch(authenticate());
+      store.dispatch(setError(null));
+    })
+    .catch((error) => {
+      store.dispatch(setError(error.message));
+    });
 };
 
 export const signOutUser = () => {
-  firebase.auth().signOut().then(() => {
-    store.dispatch(deauthenticate());
-  }).catch((error) => {
-    store.dispatch(setError(error.message));
-  });
+  firebase.auth()
+    .signOut()
+    .then(() => {
+      store.dispatch(deauthenticate());
+      store.dispatch(setError(null));
+    })
+    .catch((error) => {
+      store.dispatch(setError(error.message));
+    });
 };
