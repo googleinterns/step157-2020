@@ -9,7 +9,7 @@ import App from './app/App.js';
 import rootReducer from './reducers';
 import * as serviceWorker from './serviceWorker.js';
 
-const store = configureStore({
+export const store = configureStore({
   reducer: rootReducer,
 });
 
