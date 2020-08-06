@@ -1,11 +1,9 @@
-import './index.css';
-
-import { configureStore } from '@reduxjs/toolkit';
+import {configureStore} from '@reduxjs/toolkit';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import {Provider} from 'react-redux';
 
-import App from './app/App.js';
+import App from './app/app.js';
 import rootReducer from './reducers';
 import * as serviceWorker from './serviceWorker.js';
 
