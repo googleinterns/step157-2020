@@ -9,22 +9,6 @@ const storeSkills = () => {
       desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend quam eu sodales sollicitudin.',
       subskills: ['sports-1', 'sports-2', 'sports-3'],
     },
-<<<<<<< HEAD
-    { 
-        name: 'Academics',
-        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend quam eu sodales sollicitudin.',
-        subskills: ['academic-1', 'academic-2', 'academic-3']
-    },
-    {
-        name: 'Games',
-        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend quam eu sodales sollicitudin.',
-        subskills: ['games-1', 'games-2', 'games-3']
-    }, 
-    { 
-        name: 'Art',
-        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend quam eu sodales sollicitudin.',
-        subskills: ['art-1', 'art-2', 'art-3']
-=======
     {
       name: 'Academics',
       desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend quam eu sodales sollicitudin.',
@@ -39,7 +23,6 @@ const storeSkills = () => {
       name: 'Art',
       desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend quam eu sodales sollicitudin.',
       subskills: ['art-1', 'art-2', 'art-3'],
->>>>>>> a13b61d618bd8a2ca56651f6af0d59ebdbc58f7c
     },
     {
       name: 'Languages',
