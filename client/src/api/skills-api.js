@@ -13,7 +13,7 @@ export const storeSkills = () => {
         desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend quam eu sodales sollicitudin.',
         subskills: ['sports-1', 'sports-2', 'sports-3']
     },
-    {
+    { 
         name: 'Academics',
         desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend quam eu sodales sollicitudin.',
         subskills: ['academic-1', 'academic-2', 'academic-3']
@@ -22,8 +22,8 @@ export const storeSkills = () => {
         name: 'Games',
         desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend quam eu sodales sollicitudin.',
         subskills: ['games-1', 'games-2', 'games-3']
-    },
-    {
+    }, 
+    { 
         name: 'Art',
         desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend quam eu sodales sollicitudin.',
         subskills: ['art-1', 'art-2', 'art-3']

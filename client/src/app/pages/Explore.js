@@ -5,7 +5,6 @@ import { storeSkills } from '../../api/skills-api.js';
 
 import './Explore.css';
 
-// Components
 import CategoryCard from '../components/CategoryCard'
 
 class Explore extends Component {
