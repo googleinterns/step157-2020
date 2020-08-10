@@ -64,10 +64,8 @@ export const signOutUser = () => {
     .then(() => {
       store.dispatch(deauthenticate());
       store.dispatch(setError(null));
-      return true;
     })
     .catch((error) => {
       store.dispatch(setError(error.message));
-      return false;
     });
 };
