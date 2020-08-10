@@ -1,20 +1,29 @@
+import '../sign-in/sign-in.css';
+
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
-import { authenticate } from '../../authentication/auth-slice.js';
+import { createUser } from '../../api/user-api.js';
+import Error from '../../components/error.js';
+import { setError } from '../../authentication/auth-slice.js';
+import store from '../../app/store.js';
 
-const SignUp = (props) => {
+const SignUp = ({error}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const history =  useHistory();
+
   return (
-    <div>
-      <p>sign up</p>
+    <div id="main-container">
+      <h1 id="title">Sign Up</h1>
       <form>
         <input
           type="text"
           name="email"
           placeholder="email"
+          autoComplete="off"
           onChange={(event) => { setEmail(event.target.value); }}
         />
         <input
@@ -24,14 +33,30 @@ const SignUp = (props) => {
           onChange={(event) => { setPassword(event.target.value); }}
         />
         <button
+          id="switch-page-button"
           type="button"
-          onClick={() => { props.authenticate({ email, password, newUser: true }); }}
+          onClick={() => {
+            store.dispatch(setError(null));
+            history.push('/signin');
+          }}
         >
-          Submit
+          Sign In
         </button>
+        <button
+          id="submit-button"
+          type="button"
+          onClick={async () => {
+            createUser(email, password, history);
+          }}
+        >
+          Create Account
+        </button>
+        {error ? <Error id="error" message={error} /> : null}
       </form>
     </div>
   );
 };
 
-export default connect(null, { authenticate })(SignUp);
+const mapStateToProps = (state) => ({ error: state.auth.error });
+
+export default connect(mapStateToProps)(SignUp);

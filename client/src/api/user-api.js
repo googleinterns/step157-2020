@@ -1,34 +1,71 @@
+import store from '../app/store.js';
+import { authenticate, deauthenticate, setError } from '../authentication/auth-slice.js';
 import firebase from '../firebase.js';
 
-const storeUserInDatabase = (id) => {
+const createDefaultUserInDatabase = (id) => {
   const user = {
-    name: 'Jo Bamba',
-    age: 22,
-    bio: 'Click edit to edit your bio!',
-    skillsToTeach: ['sports'],
-    skillsToLearn: ['cooking'],
+    name: '',
+    age: 0,
+    bio: '',
+    skillsToTeach: [''],
+    skillsToLearn: [''],
   };
   firebase.database().ref('users').child(id).set(user);
 };
 
-export const createUser = (email, password) => {
+/**
+ * Creates a new user in firebase, adds them to the database,
+ * and redirects to the home page
+ * @param {string} email
+ * @param {string} password
+ * @param {history} history used to redirect to another page
+ */
+export const createUser = (email, password, history) => {
   firebase.auth()
     .createUserWithEmailAndPassword(email, password)
     .then(() => firebase.auth().currentUser.uid)
     .then((uid) => {
-      storeUserInDatabase(uid);
+      createDefaultUserInDatabase(uid);
+      store.dispatch(authenticate());
+      store.dispatch(setError(null));
+      history.push('/');
     })
-    .catch((ignore) => {});
+    .catch((error) => {
+      store.dispatch(setError(error.message));
+    });
 };
 
-export const signInUser = (email, password) => {
+/**
+ * Signs user in and redirects to the home page
+ * @param {string} email
+ * @param {string} password
+ * @param {history} history used to redirect to another page
+ */
+export const signInUser = (email, password, history) => {
   firebase.auth()
     .signInWithEmailAndPassword(email, password)
     .then(() => firebase.auth().currentUser.uid)
-    .then((uid) => uid)
-    .catch((ignore) => {});
+    .then(() => {
+      store.dispatch(authenticate());
+      store.dispatch(setError(null));
+      history.push('/');
+    })
+    .catch((error) => {
+      store.dispatch(setError(error.message));
+    });
 };
 
+/**
+ * Signs user out
+ */
 export const signOutUser = () => {
-  firebase.auth().signOut().then(() => {}).catch((ignore) => {});
+  firebase.auth()
+    .signOut()
+    .then(() => {
+      store.dispatch(deauthenticate());
+      store.dispatch(setError(null));
+    })
+    .catch((error) => {
+      store.dispatch(setError(error.message));
+    });
 };

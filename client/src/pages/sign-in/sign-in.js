@@ -1,37 +1,64 @@
+import './sign-in.css';
+
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
-import { authenticate } from '../../authentication/auth-slice.js';
+import { signInUser } from '../../api/user-api.js';
+import Error from '../../components/error.js';
+import { setError } from '../../authentication/auth-slice.js';
+import store from '../../app/store.js';
 
-const SignIn = (props) => {
+const SignIn = ({error}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const history =  useHistory();
+
   return (
-    <div>
-      <p>sign in</p>
+    <div id="main-container">
+      <h1 id="title">Sign In</h1>
       <form>
         <input
+          id="email"
           type="text"
           name="email"
           placeholder="email"
+          autoComplete="off"
           onChange={(event) => { setEmail(event.target.value); }}
         />
         <input
+          id="password"
           type="password"
           name="password"
           placeholder="password"
           onChange={(event) => { setPassword(event.target.value); }}
         />
         <button
+          id="switch-page-button"
           type="button"
-          onClick={() => { props.authenticate({ email, password, newUser: false }); }}
+          onClick={() => {
+            store.dispatch(setError(null));
+            history.push('/signup');
+          }}
         >
-          Submit
+          Create Account
         </button>
+        <button
+          id="submit-button"
+          type="button"
+          onClick={() => {
+            signInUser(email, password, history);
+          }}
+        >
+          Sign In
+        </button>
+        {error ? <Error id="error" message={error} /> : null}
       </form>
     </div>
   );
 };
 
-export default connect(null, { authenticate })(SignIn);
+const mapStateToProps = (state) => ({ error: state.auth.error });
+
+export default connect(mapStateToProps)(SignIn);
