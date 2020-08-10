@@ -1,13 +1,15 @@
 import './sign-in.css';
 
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import React, {useState} from 'react';
+import {connect} from 'react-redux';
+import {useHistory} from 'react-router-dom';
 
-import { signInUser } from '../../api/user-api.js';
+import {signInUser} from '../../api/user-api.js';
 import Error from '../../components/error.js';
+import { setError } from '../../authentication/auth-slice.js';
+import store from '../../app/store.js';
 
-const SignIn = ({ error }) => {
+const SignIn = ({error}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -35,7 +37,10 @@ const SignIn = ({ error }) => {
         <button
           id="switch-page-button"
           type="button"
-          onClick={() => { history.push('/signup'); }}
+          onClick={() => {
+            store.dispatch(setError(null));
+            history.push('/signup');
+          }}
         >
           Create Account
         </button>
@@ -43,9 +48,7 @@ const SignIn = ({ error }) => {
           id="submit-button"
           type="button"
           onClick={() => {
-            signInUser(email, password);
-            document.getElementById('email').value = '';
-            document.getElementById('password').value = '';
+            signInUser(email, password, history);
           }}
         >
           Sign In

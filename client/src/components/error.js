@@ -1,7 +1,12 @@
-import { Alert, AlertTitle } from '@material-ui/lab';
+import {Alert, AlertTitle} from '@material-ui/lab';
 import React from 'react';
 
-const Error = ({ id, message }) => (
+/**
+ * Displays an error box containing a passed in message
+ * @param {string} id Id used for CSS files
+ * @param {string} message Error message to be shown
+ */
+const Error = ({id, message}) => (
   <Alert id={id} severity="error">
     <AlertTitle>Error</AlertTitle>
     {message}
