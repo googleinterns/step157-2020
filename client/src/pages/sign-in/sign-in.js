@@ -1,10 +1,10 @@
 import './sign-in.css';
 
-import React, {useState} from 'react';
-import {connect} from 'react-redux';
-import {useHistory} from 'react-router-dom';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
-import {signInUser} from '../../api/user-api.js';
+import { signInUser } from '../../api/user-api.js';
 import Error from '../../components/error.js';
 import { setError } from '../../authentication/auth-slice.js';
 import store from '../../app/store.js';

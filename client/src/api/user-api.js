@@ -1,5 +1,5 @@
 import store from '../app/store.js';
-import {authenticate, deauthenticate, setError} from '../authentication/auth-slice.js';
+import { authenticate, deauthenticate, setError } from '../authentication/auth-slice.js';
 import firebase from '../firebase.js';
 
 const createDefaultUserInDatabase = (id) => {
