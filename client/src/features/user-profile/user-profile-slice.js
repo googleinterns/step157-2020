@@ -2,10 +2,15 @@ import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import {fetchUser, updateUser} from '../../api/user-api.js';
 
 /*
-* Redux action to update the state with the user data
+* Redux thunk action creator for user profile fetching
 */
 export const fetchUserProfileById = createAsyncThunk(
   'user/fetchUserProfileById',
+  /**
+  * Redux action to update the state with the user data
+  * @param {string} id Id of the user
+  * @returns {object} The user data
+  */
   async (id) => {
     const response = await fetchUser(id);
     return response;

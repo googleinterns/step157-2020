@@ -17,10 +17,11 @@ const createDefaultUserInDatabase = (id) => {
 
 /**
  * Creates a new user in firebase, adds them to the database,
- * and redirects to the home page
- * @param {string} email
- * @param {string} password
- * @param {history} history used to redirect to another page
+ * and redirects to the profile page
+ * @param {string} email Email of the user
+ * @param {string} password Password of the user
+ * @param {history} history Session history object
+ * @returns {undefined}
  */
 export const createUser = (email, password, history) => {
   firebase.auth()
@@ -40,10 +41,11 @@ export const createUser = (email, password, history) => {
 };
 
 /**
- * Signs user in and redirects to the home page
- * @param {string} email
- * @param {string} password
- * @param {history} history used to redirect to another page
+ * Signs the user in and redirects to the profile page
+ * @param {string} email The email of the user
+ * @param {string} password The password of the user
+ * @param {history} history A session history object
+ * @returns {undefined}
  */
 export const signInUser = (email, password, history) => {
   firebase.auth()
@@ -62,7 +64,8 @@ export const signInUser = (email, password, history) => {
 };
 
 /**
- * Signs user out
+ * Signs the user out
+ * @returns {undefined}
  */
 export const signOutUser = () => {
   firebase.auth()
