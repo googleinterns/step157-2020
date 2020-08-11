@@ -5,7 +5,7 @@ import './category-card.css';
 
 class CategoryCard extends Component {
   constructor(props) {
-    super(props);
+    super(props); 
 
     this.state = {
         seeMore: false
