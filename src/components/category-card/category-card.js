@@ -11,7 +11,7 @@ class CategoryCard extends Component {
         seeMore: false
     }
   }
-
+ 
   seeMorePressed(e) {
     e.preventDefault();
 
