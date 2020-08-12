@@ -8,7 +8,7 @@ class SubskillPage extends Component {
     super(props);
 
     this.state = {
-        subskillData: {}
+      subskillData: {}
     }
   }
 
@@ -23,13 +23,13 @@ class SubskillPage extends Component {
             
             for (let i=0; i < subskills.length; i++) {
               if (subskills[i].name.toLowerCase() === this.props.match.params.subskillId) {
-                  this.setState({
-                    subskillData: subskills[i]
+                this.setState({
+                  subskillData: subskills[i]
                 });
               }
             }
           }
-        })
+      })
     })
   }
 
@@ -38,17 +38,18 @@ class SubskillPage extends Component {
     
     if (Object.keys(subskillData).length === 0) {
       return (
-          <div>Loading...</div>
+        <div>Loading...</div>
       )
     } else {
       return (
-          <div>
-              <div>{subskillData.name}</div>
-              <div>{subskillData.desc}</div>
-          </div>
+        <div>
+          <div>{subskillData.name}</div>
+          <div>{subskillData.desc}</div>
+        </div>
       )
     }
   }
 }
 
 export default SubskillPage
+

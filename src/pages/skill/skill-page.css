@@ -3,6 +3,11 @@
     margin-top: 50px;
     padding-bottom: 100px;
 }
+.skillpg-header-img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
 .subskills-container {
     margin-top: 30px;
     display: grid;
@@ -10,8 +15,4 @@
     grid-gap: 25px;
     margin-top: 30px;
 }
-.skillpg-header-img {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-}
+

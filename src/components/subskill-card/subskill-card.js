@@ -5,7 +5,7 @@ import './subskill-card.css';
 
 class SubskillCard extends Component {
   constructor(props) {
-      super(props);
+    super(props);
   }
 
   render() {
@@ -23,3 +23,4 @@ class SubskillCard extends Component {
 }
 
 export default SubskillCard
+

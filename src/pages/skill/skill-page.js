@@ -29,7 +29,7 @@ class SkillPage extends Component {
             const imgRef = firebase.storage().ref('/images/skill_' + skillObj.name.toLowerCase() + '.jpg');
             imgRef.getDownloadURL().then(url => {
                 this.setState({
-                  imgUrl: url
+                    imgUrl: url
                 })
             })
           }
@@ -43,13 +43,13 @@ class SkillPage extends Component {
     
     if (Object.keys(skillData).length === 0 && imgUrl === '') {
       return (
-          <div className='skillpg-container'>
-              <div className='explore-title-container'>
-                  <div className="explore-title">{skillData.name}</div>
-                  <div className="explore-subtitle">{skillData.desc}</div>
-              </div>
-              <div className="subskills-container">Loading...</div>
+        <div className='skillpg-container'>
+          <div className='explore-title-container'>
+            <div className="explore-title">{skillData.name}</div>
+            <div className="explore-subtitle">{skillData.desc}</div>
           </div>
+          <div className="subskills-container">Loading...</div>
+        </div>
       )
     } else {
         return (
@@ -75,3 +75,4 @@ class SkillPage extends Component {
 }
 
 export default SkillPage
+
