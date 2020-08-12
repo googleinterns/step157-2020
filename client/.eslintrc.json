@@ -19,8 +19,8 @@
     "object-curly-spacing": 0,
     "react/jsx-filename-extension": 0,
     "react/prop-types": 0,
-    "require-jsdoc": 0,
-    "valid-jsdoc": 0
+    "require-jsdoc": 2,
+    "valid-jsdoc": 2
   },
   "overrides": [{
       "files": ["**/*.test.js"],

@@ -1,71 +1,34 @@
-import store from '../app/store.js';
-import { authenticate, deauthenticate, setError } from '../authentication/auth-slice.js';
 import firebase from '../firebase.js';
 
-const createDefaultUserInDatabase = (id) => {
-  const user = {
-    name: '',
-    age: 0,
-    bio: '',
-    skillsToTeach: [''],
-    skillsToLearn: [''],
-  };
-  firebase.database().ref('users').child(id).set(user);
+/**
+ * Fetches a user's data from the database
+ * @param {string} id Id of the user
+ * @returns {object} The user's profile data
+ */
+export const fetchUser = async (id) => {
+  const snapshot = await firebase.database().ref('users').child(id).once('value');
+  return snapshot.val();
 };
 
 /**
- * Creates a new user in firebase, adds them to the database,
- * and redirects to the home page
- * @param {string} email
- * @param {string} password
- * @param {history} history used to redirect to another page
+ * Updates a user's data in the database
+ * @param {string} id Id of the user
+ * @param {object} userProfile The values to update the user's data with
+ * @returns {undefined}
  */
-export const createUser = (email, password, history) => {
-  firebase.auth()
-    .createUserWithEmailAndPassword(email, password)
-    .then(() => firebase.auth().currentUser.uid)
-    .then((uid) => {
-      createDefaultUserInDatabase(uid);
-      store.dispatch(authenticate());
-      store.dispatch(setError(null));
-      history.push('/');
-    })
-    .catch((error) => {
-      store.dispatch(setError(error.message));
-    });
+export const updateUser = (id, userProfile) => {
+  firebase.database().ref('users').child(id).update(userProfile);
 };
 
 /**
- * Signs user in and redirects to the home page
- * @param {string} email
- * @param {string} password
- * @param {history} history used to redirect to another page
+ * Uploads a user's profile photo to cloud storage
+ * @param {string} id Id of the user
+ * @param {object} img The image uploaded by the user
+ * @returns {string} The download url for the uploaded image
  */
-export const signInUser = (email, password, history) => {
-  firebase.auth()
-    .signInWithEmailAndPassword(email, password)
-    .then(() => firebase.auth().currentUser.uid)
-    .then(() => {
-      store.dispatch(authenticate());
-      store.dispatch(setError(null));
-      history.push('/');
-    })
-    .catch((error) => {
-      store.dispatch(setError(error.message));
-    });
-};
-
-/**
- * Signs user out
- */
-export const signOutUser = () => {
-  firebase.auth()
-    .signOut()
-    .then(() => {
-      store.dispatch(deauthenticate());
-      store.dispatch(setError(null));
-    })
-    .catch((error) => {
-      store.dispatch(setError(error.message));
-    });
+export const uploadProfilePicture = async (id, img) => {
+  const profileReference = firebase.storage().ref('images').child(`${id}/profile-photo`);
+  await profileReference.put(img);
+  const url = await profileReference.getDownloadURL();
+  return url;
 };
