@@ -2,9 +2,12 @@ import { Alert, AlertTitle } from '@material-ui/lab';
 import React from 'react';
 
 /**
- * Displays an error box containing a passed in message
- * @param {string} id Id used for CSS files
- * @param {string} message Error message to be shown
+ * React component for errors
+ * @example
+ * const id = 'abcd'
+ * const message = 'login error'
+ * return ( <Error id={id} message={message} />)
+ * @returns {JSX.Element} The error component
  */
 const Error = ({id, message}) => (
   <Alert id={id} severity="error">
