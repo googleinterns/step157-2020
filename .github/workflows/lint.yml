@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: Create .env file
+      run: cd client; touch .env; echo SKIP_PREFLIGHT_CHECK=true >> .env; cat .env
     - name: Maven compile
       run: mvn package
     - name: install node dependencies

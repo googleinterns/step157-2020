@@ -1,13 +1,12 @@
-import '../sign-in/sign-in.css';
-
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { createUser } from '../../api/user-api.js';
+import { createUser } from '../../api/auth-api.js';
 import Error from '../../components/error.js';
 import { setError } from '../../authentication/auth-slice.js';
 import store from '../../app/store.js';
+import '../sign-in/sign-in.css';
 
 const SignUp = ({error}) => {
   const [email, setEmail] = useState('');
