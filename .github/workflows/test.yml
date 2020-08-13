@@ -8,10 +8,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: Create .env file
+      if: always()
+      run: cd client; touch .env; echo SKIP_PREFLIGHT_CHECK=true >> .env; cat .env
     - name: install node dependencies
       if: always()
       run: cd client; yarn install
     - name: Run all tests
+      env:
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
       if: always()
       run: cd client; yarn firebase emulators:exec "yarn test"
     - name: Notify on failure
