@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: Create .env file
+      run: cd client; touch .env; echo SKIP_PREFLIGHT_CHECK=true >> .env; cat .env
     - name: Maven compile
       run: mvn package
     - name: install node dependencies
@@ -24,7 +26,7 @@ jobs:
       run: find client/src -name *.css | xargs client/node_modules/prettier/bin-prettier.js --check
     - name: Check Java Formatting
       if: always()
-      run: diff -u <(cat src/main/java/com/google/sps/servlets/*.java) <(node_modules/clang-format/bin/linux_x64/clang-format --style=Google src/main/java/com/google/sps/servlets/*.java)
+      run: diff -u <(cat src/main/java/com/google/sps/servlets/*.java) <(client/node_modules/clang-format/bin/linux_x64/clang-format --style=Google src/main/java/com/google/sps/servlets/*.java)
     - name: Notify on failure
       if: failure()
       run: echo 'run "make validate" and "make pretty" to see/fix errors locally'
