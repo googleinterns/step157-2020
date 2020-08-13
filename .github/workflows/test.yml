@@ -1,0 +1,19 @@
+name: Testing
+
+on: [push]
+
+jobs:
+  build:
+    name: "Frontend tests"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: install node dependencies
+      if: always()
+      run: cd client; yarn install
+    - name: Run all tests
+      if: always()
+      run: cd client; yarn firebase emulators:exec "yarn test"
+    - name: Notify on failure
+      if: failure()
+      run: echo 'Some tests in this test suite do not pass'
