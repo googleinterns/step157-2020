@@ -1,0 +1,57 @@
+#user-profile {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto', sans-serif;
+  margin: auto;
+  max-width: 90%;
+}
+
+#name-and-age {
+  align-self: center;
+  font-size: 30px;
+}
+
+#user-bio {
+  margin: 0 0 30px 0;
+  padding: 15px;
+}
+
+#user-skills {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#skills-to-teach,
+#skills-to-learn {
+  display: flex;
+  flex-flow: row wrap;
+  margin: 3px;
+  width: 250px;
+}
+
+#profile-form {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  max-width: 90%;
+}
+
+#image-upload {
+  display: none;
+}
+
+.user-photo {
+  align-self: center;
+  margin: 0 0 0 5px;
+}
+
+#actions {
+  align-self: center;
+  margin: 10px 0 0 0;
+}
+
+.form-action {
+  margin: 0 5px 0 5px;
+}
