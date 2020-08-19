@@ -45,7 +45,7 @@
         <version>2.2.0</version>
         <configuration>
           <!-- TODO: set project ID. -->
-          <deploy.projectId>SET-CAPSTONE-ID</deploy.projectId>
+          <deploy.projectId>step-xchange</deploy.projectId>
           <deploy.version>1</deploy.version>
         </configuration>
       </plugin>
