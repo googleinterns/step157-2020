@@ -32,6 +32,9 @@ client/logs
 client/*.log
 client/firebase-debug.log*
 
+#Firebase Key
+firebase-adminsdk-key.json
+
 # Firebase cache
 client/.firebase/
 
