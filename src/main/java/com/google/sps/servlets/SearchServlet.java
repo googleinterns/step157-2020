@@ -108,7 +108,7 @@ public class SearchServlet extends HttpServlet {
       initializeDatabase();
 
       final FirebaseDatabase database = FirebaseDatabase.getInstance();
-      DatabaseReference ref = database.getReference("test_skills");
+      DatabaseReference ref = database.getReference("skills");
       list = new ArrayList<>();
 
       ref.orderByKey()
