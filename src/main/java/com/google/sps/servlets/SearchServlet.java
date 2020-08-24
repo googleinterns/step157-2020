@@ -15,15 +15,15 @@
 package com.google.sps.servlets;
 
 import com.google.auth.oauth2.GoogleCredentials;
-import com.google.gson.Gson;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 import com.google.sps.data.Skill;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -31,8 +31,8 @@ import java.io.IOException;
 import java.lang.Math;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.concurrent.CountDownLatch;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -41,7 +41,6 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet to test set-up */
 @WebServlet("/skillsearch")
 public class SearchServlet extends HttpServlet {
-
   private ArrayList<Skill> list;
   private String query;
 
@@ -53,9 +52,9 @@ public class SearchServlet extends HttpServlet {
     // You must do this for every session because the value will be deleted on session end
     try {
       FirebaseOptions options = new FirebaseOptions.Builder()
-        .setCredentials(GoogleCredentials.getApplicationDefault())
-        .setDatabaseUrl("https://step-xchange.firebaseio.com")
-        .build();
+                                    .setCredentials(GoogleCredentials.getApplicationDefault())
+                                    .setDatabaseUrl("https://step-xchange.firebaseio.com")
+                                    .build();
 
       if (FirebaseApp.getApps().isEmpty()) {
         FirebaseApp.initializeApp(options);
@@ -88,7 +87,6 @@ public class SearchServlet extends HttpServlet {
   }
 
   class Worker implements Runnable {
-
     private final CountDownLatch startSignal;
     private final CountDownLatch doneSignal;
 
@@ -113,27 +111,29 @@ public class SearchServlet extends HttpServlet {
       DatabaseReference ref = database.getReference("test_skills");
       list = new ArrayList<>();
 
-      ref.orderByKey().equalTo(query.toLowerCase()).addListenerForSingleValueEvent(new ValueEventListener() {
-        @Override
-        public void onDataChange(DataSnapshot dataSnapshot) {
-          if (dataSnapshot.hasChildren()) {
-            for (DataSnapshot child : dataSnapshot.getChildren()) {
-              Skill skill = child.getValue(Skill.class);
-              list.add(skill);
+      ref.orderByKey()
+          .equalTo(query.toLowerCase())
+          .addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+              if (dataSnapshot.hasChildren()) {
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                  Skill skill = child.getValue(Skill.class);
+                  list.add(skill);
+                }
+                doneSignal.countDown();
+              } else {
+                System.err.println("\nno results");
+                doneSignal.countDown();
+              }
             }
-            doneSignal.countDown();
-          } else {
-            System.err.println("\nno results");
-            doneSignal.countDown();
-          }
-        }
 
-        @Override
-        public void onCancelled(DatabaseError databaseError) {
-          System.err.println("database error:\n" + databaseError);
-          doneSignal.countDown();
-        }
-      });
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+              System.err.println("database error:\n" + databaseError);
+              doneSignal.countDown();
+            }
+          });
     }
   }
 }
