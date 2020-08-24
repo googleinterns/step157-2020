@@ -21,23 +21,23 @@ const createDefaultUserInDatabase = (id) => {
  * @param {string} email Email of the user
  * @param {string} password Password of the user
  * @param {history} history Session history object
- * @returns {undefined}
+ * @returns {string} id of the created user
  */
-export const createUser = (email, password, history) => {
-  firebase.auth()
-    .createUserWithEmailAndPassword(email, password)
-    .then(() => firebase.auth().currentUser.uid)
-    .then((uid) => {
-      createDefaultUserInDatabase(uid);
-      store.dispatch(authenticate());
-      sessionStorage.setItem('id', uid);
-      setUserId(uid);
-      store.dispatch(setError(null));
-      history.push('/profile');
-    })
-    .catch((error) => {
-      store.dispatch(setError(error.message));
-    });
+export const createUser = async (email, password, history) => {
+  try {
+    const userCredentials =  await firebase.auth().createUserWithEmailAndPassword(email, password);
+    const userId = userCredentials.user.uid;
+    createDefaultUserInDatabase(userId);
+    store.dispatch(authenticate());
+    sessionStorage.setItem('id', userId);
+    setUserId(userId);
+    store.dispatch(setError(null));
+    history.push('/profile');
+    return userId;
+  } catch (error) {
+    store.dispatch(setError(error.message));
+    return null;
+  }
 };
 
 /**
