@@ -84,34 +84,34 @@ public class SearchServlet extends HttpServlet {
   }
 
   private void doSearch(CountDownLatch doneSignal) {
-      initializeDatabase();
+    initializeDatabase();
 
-      final FirebaseDatabase database = FirebaseDatabase.getInstance();
-      DatabaseReference ref = database.getReference("skills");
-      searchResults = new ArrayList<>();
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference ref = database.getReference("skills");
+    searchResults = new ArrayList<>();
 
-      ref.orderByKey()
-          .equalTo(query.toLowerCase())
-          .addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-              if (dataSnapshot.hasChildren()) {
-                for (DataSnapshot child : dataSnapshot.getChildren()) {
-                  Skill skill = child.getValue(Skill.class);
-                  searchResults.add(skill);
-                }
-                doneSignal.countDown();
-              } else {
-                System.err.println("\nno results");
-                doneSignal.countDown();
+    ref.orderByKey()
+        .equalTo(query.toLowerCase())
+        .addListenerForSingleValueEvent(new ValueEventListener() {
+          @Override
+          public void onDataChange(DataSnapshot dataSnapshot) {
+            if (dataSnapshot.hasChildren()) {
+              for (DataSnapshot child : dataSnapshot.getChildren()) {
+                Skill skill = child.getValue(Skill.class);
+                searchResults.add(skill);
               }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-              System.err.println("database error:\n" + databaseError);
+              doneSignal.countDown();
+            } else {
+              System.err.println("\nno results");
               doneSignal.countDown();
             }
-          });
-    }
+          }
+
+          @Override
+          public void onCancelled(DatabaseError databaseError) {
+            System.err.println("database error:\n" + databaseError);
+            doneSignal.countDown();
+          }
+        });
+  }
 }
