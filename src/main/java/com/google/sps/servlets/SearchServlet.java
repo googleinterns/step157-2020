@@ -41,13 +41,13 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet to test set-up */
 @WebServlet("/skillsearch")
 public class SearchServlet extends HttpServlet {
-  private ArrayList<Skill> list;
+  private ArrayList<Skill> searchResults;
   private String query;
 
   private void initializeDatabase() {
     // To set the default application credentials you must run the following command:
     // GOOGLE_APPLICATION_CREDENTIALS="path/to/firebase-key.json"
-    // and add that file to the .gitignore if it's location is different than the one that's
+    // and add that file to the .gitignore if its location is different than the one that's
     // currently there
     // You must do this for every session because the value will be deleted on session end
     try {
@@ -68,12 +68,9 @@ public class SearchServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     query = request.getParameter("query");
 
-    CountDownLatch startSignal = new CountDownLatch(1);
     CountDownLatch doneSignal = new CountDownLatch(1);
 
-    new Thread(new Worker(startSignal, doneSignal)).start();
-
-    startSignal.countDown();
+    doSearch(doneSignal);
 
     try {
       doneSignal.await();
@@ -83,33 +80,15 @@ public class SearchServlet extends HttpServlet {
 
     Gson gson = new Gson();
     response.setContentType("application/json;");
-    response.getWriter().println(gson.toJson(list));
+    response.getWriter().println(gson.toJson(searchResults));
   }
 
-  class Worker implements Runnable {
-    private final CountDownLatch startSignal;
-    private final CountDownLatch doneSignal;
-
-    Worker(CountDownLatch startSignal, CountDownLatch doneSignal) {
-      this.startSignal = startSignal;
-      this.doneSignal = doneSignal;
-    }
-
-    public void run() {
-      try {
-        startSignal.await();
-        doSearch();
-      } catch (InterruptedException e) {
-        System.err.println(e);
-      }
-    }
-
-    void doSearch() {
+  private void doSearch(CountDownLatch doneSignal) {
       initializeDatabase();
 
       final FirebaseDatabase database = FirebaseDatabase.getInstance();
       DatabaseReference ref = database.getReference("skills");
-      list = new ArrayList<>();
+      searchResults = new ArrayList<>();
 
       ref.orderByKey()
           .equalTo(query.toLowerCase())
@@ -119,7 +98,7 @@ public class SearchServlet extends HttpServlet {
               if (dataSnapshot.hasChildren()) {
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                   Skill skill = child.getValue(Skill.class);
-                  list.add(skill);
+                  searchResults.add(skill);
                 }
                 doneSignal.countDown();
               } else {
@@ -135,5 +114,4 @@ public class SearchServlet extends HttpServlet {
             }
           });
     }
-  }
 }
