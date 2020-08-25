@@ -1,0 +1,17 @@
+.skillpg-header-img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+.skillpg-container {
+    padding: 0 15%;
+    margin-top: 50px;
+    padding-bottom: 100px;
+}
+.subskills-container {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 25px;
+    margin-top: 30px;
+}

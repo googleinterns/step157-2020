@@ -16,7 +16,7 @@
 .home-subtitle {
   margin-top: 20px;
   font-size: 25px;
-  opacity: 0.75;
+  opacity: .75;
 }
 
 .home-btn-container {
@@ -37,6 +37,7 @@
   margin-right: 20px;
 }
 .btn-explore {
+
 }
 
 .home-img-container {
