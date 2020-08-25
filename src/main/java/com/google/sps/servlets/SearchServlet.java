@@ -48,8 +48,8 @@ public class SearchServlet extends HttpServlet {
     // To set the default application credentials you must run the following command:
     // GOOGLE_APPLICATION_CREDENTIALS="path/to/firebase-key.json"
     // and add that file to the .gitignore if its location is different than the one that's
-    // currently there
-    // You must do this for every session because the value will be deleted on session end
+    // currently there.
+    // You must do this for every session because the value will be deleted on session end.
     try {
       FirebaseOptions options = new FirebaseOptions.Builder()
                                     .setCredentials(GoogleCredentials.getApplicationDefault())
