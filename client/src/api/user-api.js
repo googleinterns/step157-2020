@@ -6,8 +6,12 @@ import firebase from '../firebase.js';
  * @returns {object} The user's profile data
  */
 export const fetchUser = async (id) => {
-  const snapshot = await firebase.database().ref('users').child(id).once('value');
-  return snapshot.val();
+  try {
+    const snapshot = await firebase.database().ref('users').child(id).once('value');
+    return snapshot.val();
+  } catch (error) {
+    return error;
+  }
 };
 
 /**
