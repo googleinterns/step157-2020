@@ -1,17 +1,3 @@
-.navbar {
-  background-color: black;
-  padding: 30px 15%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-.nav-logo {
-  color: white;
-  text-decoration: none;
-  font-size: 24px;
-  font-weight: 600;
-}
 .nav-link {
   color: white;
   text-decoration: none;
@@ -19,4 +5,20 @@
 }
 .nav-link-active {
   font-weight: 600;
+}
+
+.nav-logo {
+  color: white;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.navbar {
+  background-color: black;
+  padding: 30px 15%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
