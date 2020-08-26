@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import rootReducer from '../reducers';
 
 /**
- * Allows other files to call reducer functions via dispatch
+ * Contains the state for the app
  */
 const store = configureStore({
   reducer: rootReducer,

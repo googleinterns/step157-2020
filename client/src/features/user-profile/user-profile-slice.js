@@ -12,12 +12,16 @@ export const fetchUserProfileById = createAsyncThunk(
   * @returns {object} The user data
   */
   async (id) => {
-    const response = await fetchUser(id);
-    return response;
+    try {
+      const response = await fetchUser(id);
+      return response;
+    } catch (error) {
+      return error;
+    }
   },
 );
 
-const initialState = {
+export const initialState = {
   id: sessionStorage.getItem('id'),
   userProfile: {
     photoUrl: '',

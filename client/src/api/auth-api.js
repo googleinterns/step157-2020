@@ -21,7 +21,7 @@ const createDefaultUserInDatabase = (id) => {
  * @param {string} email Email of the user
  * @param {string} password Password of the user
  * @param {history} history Session history object
- * @returns {string} id of the created user
+ * @returns {?string} id of the created user
  */
 export const createUser = async (email, password, history) => {
   try {
@@ -30,7 +30,7 @@ export const createUser = async (email, password, history) => {
     createDefaultUserInDatabase(userId);
     store.dispatch(authenticate());
     sessionStorage.setItem('id', userId);
-    setUserId(userId);
+    store.dispatch(setUserId(userId));
     store.dispatch(setError(null));
     history.push('/profile');
     return userId;
@@ -45,22 +45,20 @@ export const createUser = async (email, password, history) => {
  * @param {string} email The email of the user
  * @param {string} password The password of the user
  * @param {history} history A session history object
- * @returns {undefined}
+ * @returns {?string} id of the created user
  */
-export const signInUser = (email, password, history) => {
-  firebase.auth()
-    .signInWithEmailAndPassword(email, password)
-    .then(() => firebase.auth().currentUser.uid)
-    .then((uid) => {
-      store.dispatch(authenticate());
-      sessionStorage.setItem('id', uid);
-      setUserId(uid);
-      store.dispatch(setError(null));
-      history.push('/profile');
-    })
-    .catch((error) => {
-      store.dispatch(setError(error.message));
-    });
+export const signInUser = async (email, password, history) => {
+  try {
+    const userCredentials = await firebase.auth().signInWithEmailAndPassword(email, password);
+    const userId = userCredentials.user.uid;
+    store.dispatch(setUserId(userId));
+    store.dispatch(setError(null));
+    history.push('/profile');
+    return userId;
+  } catch (error) {
+    store.dispatch(setError(error.message));
+    return null;
+  }
 };
 
 /**
@@ -73,7 +71,7 @@ export const signOutUser = () => {
     .then(() => {
       store.dispatch(deauthenticate());
       sessionStorage.setItem('id', null);
-      setUserId(null);
+      store.dispatch(setUserId(null));
       store.dispatch(setError(null));
     })
     .catch((error) => {
