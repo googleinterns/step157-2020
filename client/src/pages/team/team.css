@@ -16,6 +16,7 @@ hr {
 .teammate-container {
   padding: 10px 30px;
   justify-content: center;
+  width: 33%;
   text-align: center;
 }
 
