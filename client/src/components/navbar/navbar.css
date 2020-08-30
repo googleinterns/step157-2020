@@ -1,3 +1,19 @@
+.nav-link {
+  color: white;
+  text-decoration: none;
+  margin-left: 30px;
+}
+.nav-link-active {
+  font-weight: 600;
+}
+
+.nav-logo {
+  color: white;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: 600;
+}
+
 .navbar {
   background-color: black;
   padding: 30px 15%;
@@ -5,21 +21,4 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-}
-
-.nav-logo {
-  color: white;
-  font-size: 24px;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.nav-link {
-  color: white;
-  text-decoration: none;
-  margin-left: 30px;
-}
-
-.nav-link-active {
-  font-weight: 600;
 }

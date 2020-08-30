@@ -15,6 +15,7 @@ function Navbar() {
         <NavLink className="nav-link" activeClassName="nav-link-active" exact to="/explore">Explore</NavLink>
         <NavLink className="nav-link" activeClassName="nav-link-active" exact to="/team">Meet the Team</NavLink>
         <NavLink className="nav-link" activeClassName="nav-link-active" exact to="/signin">Sign In</NavLink>
+        <NavLink className="nav-link" activeClassName="nav-link-active" exact to="/profile/:id?">My Profile</NavLink>
       </div>
     </div>
   );

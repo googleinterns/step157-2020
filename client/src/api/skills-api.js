@@ -7,42 +7,146 @@ const storeSkills = () => {
     {
       name: 'Sports',
       desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend quam eu sodales sollicitudin.',
-      subskills: ['sports-1', 'sports-2', 'sports-3'],
+      subskills: [
+        {
+          name: 'sports-1',
+          desc: 'This is a subskill description',
+        },
+        {
+          name: 'sports-2',
+          desc: 'This is a subskill description',
+        },
+        {
+          name: 'sports-3',
+          desc: 'This is a subskill description',
+        },
+      ],
     },
     {
-      name: 'Academics',
+      name: 'Education',
       desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend quam eu sodales sollicitudin.',
-      subskills: ['academic-1', 'academic-2', 'academic-3'],
+      subskills: [
+        {
+          name: 'education-1',
+          desc: 'This is a subskill description',
+        },
+        {
+          name: 'education-2',
+          desc: 'This is a subskill description',
+        },
+        {
+          name: 'education-3',
+          desc: 'This is a subskill description',
+        },
+      ],
     },
     {
       name: 'Games',
       desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend quam eu sodales sollicitudin.',
-      subskills: ['games-1', 'games-2', 'games-3'],
+      subskills: [
+        {
+          name: 'games-1',
+          desc: 'This is a subskill description',
+        },
+        {
+          name: 'games-2',
+          desc: 'This is a subskill description',
+        },
+        {
+          name: 'games-3',
+          desc: 'This is a subskill description',
+        },
+      ],
     },
     {
       name: 'Art',
       desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend quam eu sodales sollicitudin.',
-      subskills: ['art-1', 'art-2', 'art-3'],
+      subskills: [
+        {
+          name: 'art-1',
+          desc: 'This is a subskill description',
+        },
+        {
+          name: 'art-2',
+          desc: 'This is a subskill description',
+        },
+        {
+          name: 'art-3',
+          desc: 'This is a subskill description',
+        },
+      ],
     },
     {
       name: 'Languages',
       desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend quam eu sodales sollicitudin.',
-      subskills: ['languages-1', 'languages-2', 'languages-3'],
+      subskills: [
+        {
+          name: 'languages-1',
+          desc: 'This is a subskill description',
+        },
+        {
+          name: 'languages-2',
+          desc: 'This is a subskill description',
+        },
+        {
+          name: 'languages-3',
+          desc: 'This is a subskill description',
+        },
+      ],
     },
     {
       name: 'Music',
       desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend quam eu sodales sollicitudin.',
-      subskills: ['music-1', 'music-2', 'music-3'],
+      subskills: [
+        {
+          name: 'music-1',
+          desc: 'This is a subskill description',
+        },
+        {
+          name: 'music-2',
+          desc: 'This is a subskill description',
+        },
+        {
+          name: 'music-3',
+          desc: 'This is a subskill description',
+        },
+      ],
     },
     {
       name: 'Cooking',
       desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend quam eu sodales sollicitudin.',
-      subskills: ['cooking-1', 'cooking-2', 'cooking-3'],
+      subskills: [
+        {
+          name: 'cooking-1',
+          desc: 'This is a subskill description',
+        },
+        {
+          name: 'cooking-2',
+          desc: 'This is a subskill description',
+        },
+        {
+          name: 'cooking-3',
+          desc: 'This is a subskill description',
+        },
+      ],
     },
     {
       name: 'Lifestyle',
       desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend quam eu sodales sollicitudin.',
-      subskills: ['lifestyle-1', 'lifestyle-2', 'lifestyle-3'],
+      subskills: [
+        {
+          name: 'lifestyle-1',
+          desc: 'This is a subskill description',
+        },
+        {
+          name: 'lifestyle-2',
+          desc: 'This is a subskill description',
+        },
+        {
+          name: 'lifestyle-3',
+          desc: 'This is a subskill description',
+        },
+      ],
     },
   ]);
 
