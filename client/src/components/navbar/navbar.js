@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import './navbar.css';
 
-/*
+/**
  * React component for the navigation bar
  * @returns {JSX.Element} The Navbar component
  */
