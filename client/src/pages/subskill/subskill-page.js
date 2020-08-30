@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 
-import './subskill-page.css';
-
 class SubskillPage extends Component {
   constructor(props) {
     super(props);
@@ -52,4 +50,5 @@ class SubskillPage extends Component {
 }
 
 export default SubskillPage
+
 

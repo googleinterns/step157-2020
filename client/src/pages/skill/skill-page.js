@@ -23,7 +23,7 @@ class SkillPage extends Component {
 
           if (skillObj.name.toLowerCase() === this.props.match.params.skillId) {
             this.setState({
-                skillData: skillObj
+              skillData: skillObj
             });
 
             const imgRef = firebase.storage().ref('/images/skill_' + skillObj.name.toLowerCase() + '.jpg');
@@ -43,13 +43,13 @@ class SkillPage extends Component {
     
     if (Object.keys(skillData).length === 0 && imgUrl === '') {
       return (
-          <div className='skillpg-container'>
-              <div className='explore-title-container'>
-                  <div className="explore-title">{skillData.name}</div>
-                  <div className="explore-subtitle">{skillData.desc}</div>
-              </div>
-              <div className="subskills-container">Loading...</div>
+        <div className='skillpg-container'>
+          <div className='explore-title-container'>
+            <div className="explore-title">{skillData.name}</div>
+            <div className="explore-subtitle">{skillData.desc}</div>
           </div>
+          <div className="subskills-container">Loading...</div>
+        </div>
       )
     } else {
         return (
