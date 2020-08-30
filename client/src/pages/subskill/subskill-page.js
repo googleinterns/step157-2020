@@ -6,49 +6,47 @@ class SubskillPage extends Component {
     super(props);
 
     this.state = {
-        subskillData: {}
-    }
+      subskillData: {},
+    };
   }
 
   componentDidMount() {
     const skillsRef = firebase.database().ref('skills');
-    skillsRef.once('value').then(snapshot => {
-        snapshot.forEach(skill => {
-          let skillObj = skill.val();
+    skillsRef.once('value').then((snapshot) => {
+      snapshot.forEach((skill) => {
+        const skillObj = skill.val();
+        /* eslint-disable react/destructuring-assignment */
+        if (skillObj.name.toLowerCase() === this.props.match.params.skillId) {
+          const {subskills} = skillObj;
 
-          if (skillObj.name.toLowerCase() === this.props.match.params.skillId) {
-            let subskills = skillObj.subskills;
-            
-            for (let i=0; i < subskills.length; i++) {
-              if (subskills[i].name.toLowerCase() === this.props.match.params.subskillId) {
-                  this.setState({
-                    subskillData: subskills[i]
-                });
-              }
+          for (let i = 0; i < subskills.length; i += 1) {
+            if (subskills[i].name.toLowerCase() === this.props.match.params.subskillId) {
+              this.setState({
+                subskillData: subskills[i],
+              });
             }
           }
-        })
-    })
+        }
+        /* eslint-enable react/destructuring-assignment */
+      });
+    });
   }
 
   render() {
-    let { subskillData } = this.state;
-    
+    const { subskillData } = this.state;
+
     if (Object.keys(subskillData).length === 0) {
       return (
-          <div>Loading...</div>
-      )
-    } else {
-      return (
-          <div>
-              <div>{subskillData.name}</div>
-              <div>{subskillData.desc}</div>
-          </div>
-      )
+        <div>Loading...</div>
+      );
     }
+    return (
+      <div>
+        <div>{subskillData.name}</div>
+        <div>{subskillData.desc}</div>
+      </div>
+    );
   }
 }
 
-export default SubskillPage
-
-
+export default SubskillPage;
