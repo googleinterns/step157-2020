@@ -21,7 +21,7 @@ const ChatHistory = (props) => {
         setChatHistory(() => messages);
       }
     });
-  }, [senderId, receiverId]);
+  }, [senderId, receiverId, setChatHistory]);
 
   useEffect(() => {
     if (textFieldRef.current !== null) {
@@ -30,6 +30,7 @@ const ChatHistory = (props) => {
         block: 'start',
       });
     }
+    /* eslint-disable react-hooks/exhaustive-deps */
   }, []);
 
   // a list of text divs, obtained from the messages in the chat history
