@@ -87,7 +87,13 @@ public class SearchServlet extends HttpServlet {
     initializeDatabase();
 
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference ref = database.getReference("skills");
+
+    // Choose database environment
+    String envTesting = System.getenv("TESTING");
+    DatabaseReference ref = envTesting != null && envTesting.equals("true")
+        ? database.getReference("test_skills")
+        : database.getReference("skills");
+
     searchResults = new ArrayList<>();
 
     ref.orderByKey()
@@ -98,6 +104,7 @@ public class SearchServlet extends HttpServlet {
             if (dataSnapshot.hasChildren()) {
               for (DataSnapshot child : dataSnapshot.getChildren()) {
                 Skill skill = child.getValue(Skill.class);
+                skill.setKey(child.getKey());
                 searchResults.add(skill);
               }
               doneSignal.countDown();

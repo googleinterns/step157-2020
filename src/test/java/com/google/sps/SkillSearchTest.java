@@ -22,9 +22,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import java.util.Collection;
-import java.util.List;
-import java.util.Arrays;
 
 @RunWith(JUnit4.class)
 public final class SkillSearchTest {
@@ -33,7 +30,7 @@ public final class SkillSearchTest {
 
   StringWriter stringWriter;
   PrintWriter printWriter;
-  
+
   Gson gson;
 
   @Before
@@ -47,8 +44,7 @@ public final class SkillSearchTest {
   }
 
   @Test
-  public void firstTest() throws IOException, ServletException {
-
+  public void returnsCorrectSkill() throws IOException, ServletException {
     when(request.getParameter("query")).thenReturn("biology");
 
     new SearchServlet().doGet(request, response);
@@ -62,13 +58,13 @@ public final class SkillSearchTest {
     ArrayList<String> userList = new ArrayList<>();
     userList.add("u2");
     userList.add("u3");
-    expected.add(new Skill("academics", "blah", userList));
+    expected.add(new Skill("biology", "academics", "blah", userList));
 
     assertEquals(expected, searchResults);
   }
 
   @Test
-  public void secondTest() throws IOException, ServletException {
+  public void caseIsIgnored() throws IOException, ServletException {
     when(request.getParameter("query")).thenReturn("BIOLOGY");
 
     new SearchServlet().doGet(request, response);
@@ -82,13 +78,13 @@ public final class SkillSearchTest {
     ArrayList<String> userList = new ArrayList<>();
     userList.add("u2");
     userList.add("u3");
-    expected.add(new Skill("academics", "blah", userList));
+    expected.add(new Skill("biology", "academics", "blah", userList));
 
     assertEquals(expected, searchResults);
   }
 
   @Test
-  public void thirdTest() throws IOException, ServletException {
+  public void noMatchReturnsEmpty() throws IOException, ServletException {
     when(request.getParameter("query")).thenReturn("biolog");
 
     new SearchServlet().doGet(request, response);
