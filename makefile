@@ -5,7 +5,7 @@ PRETTIER=client/node_modules/prettier/bin-prettier.js
 
 pretty:
 	find client/src -name *.css | xargs $(PRETTIER) --write
-	find src/main/java -iname *.java | xargs $(CLANG_FORMAT) -i
+	find src -iname *.java | xargs $(CLANG_FORMAT) -i
 	find client/src -name *.js | xargs $(ESLINT) --fix
 
 validate:

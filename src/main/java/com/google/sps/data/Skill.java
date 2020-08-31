@@ -26,4 +26,19 @@ public class Skill {
   public String getDesc() {
     return desc;
   }
+
+  @Override
+  public boolean equals(Object object) {
+    Skill other = (Skill) object;
+    return this.category.equals(other.category) && this.desc.equals(other.desc) && this.users.equals(other.users);
+  }
+
+  @Override
+  public String toString() {
+    String str = "\"" + category + "\" \"" + desc + "\" \""; 
+    for (String user : users) {
+      str += user + " ";
+    }
+    return str + "\"";
+  }
 }
