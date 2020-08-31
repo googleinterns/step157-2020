@@ -40,17 +40,30 @@ const Profile = (props) => {
     setIsEditing(queries.edit === 'true');
   }, [queries.edit]);
 
+  const showButton = isOwnProfile ? (
+    <Button
+      variant="contained"
+      color="primary"
+      disabled={isEditing}
+      onClick={() => { history.push(`${location.pathname}?edit=true`); }}
+    >
+      Edit
+      {' '}
+    </Button>
+  ) : (
+    <Button
+      variant="contained"
+      color="primary"
+      onClick={() => { history.push(`/chat/${params.id}`); }}
+    >
+      Message
+      {' '}
+    </Button>
+  );
+
   return (
     <div>
-      <Button
-        variant="contained"
-        color="primary"
-        disabled={!isOwnProfile || isEditing}
-        onClick={() => { history.push(`${location.pathname}?edit=true`); }}
-      >
-        Edit
-        {' '}
-      </Button>
+      {showButton}
       {isEditing ? <EditableProfile /> : <ReadOnlyProfile /> }
     </div>
   );
