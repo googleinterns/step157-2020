@@ -11,7 +11,7 @@ jobs:
     - name: Create .env file
       run: cd client; touch .env; echo SKIP_PREFLIGHT_CHECK=true >> .env; cat .env
     - name: Maven compile
-      run: mvn package
+      run: GOOGLE_APPLICATION_CREDENTIALS=${{ secrets.FIREBASE_KEY }}; mvn package
     - name: install node dependencies
       if: always()
       run: cd client; yarn install
