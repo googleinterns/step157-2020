@@ -52,7 +52,7 @@ public final class SkillSearchTest {
       field.setAccessible(true);
       ((Map<String, String>) field.get(env)).put("TESTING", "true");
     } catch (ReflectiveOperationException e) {
-      System.out.println(e +);
+      System.out.println(e);
     }
   }
 
