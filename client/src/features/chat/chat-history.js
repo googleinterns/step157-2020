@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {useImmer} from 'use-immer';
 import Button from '@material-ui/core/Button';
 import TextAreaAutosize from '@material-ui/core/TextareaAutosize';
-import {fetchChatHistory, sendMessage} from '../../api/chat-api.js';
+import {subscribeToChatMessages, sendMessage} from '../../api/chat-api.js';
 import './chat.css';
 
 const ChatHistory = (props) => {
@@ -16,7 +16,7 @@ const ChatHistory = (props) => {
   const textFieldRef = createRef();
 
   useEffect(() => {
-    fetchChatHistory(senderId, receiverId, (messages) => {
+    subscribeToChatMessages(senderId, receiverId, (messages) => {
       if (messages !== null && messages !== undefined) {
         setChatHistory(() => messages);
       }

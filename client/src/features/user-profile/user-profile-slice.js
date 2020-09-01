@@ -22,7 +22,7 @@ export const fetchUserProfileById = createAsyncThunk(
 );
 
 export const initialState = {
-  id: sessionStorage.getItem('id'),
+  id: localStorage.getItem('id'),
   userProfile: {
     photoUrl: '',
     name: '',

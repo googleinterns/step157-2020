@@ -29,7 +29,7 @@ export const createUser = async (email, password, history) => {
     const userId = userCredentials.user.uid;
     createDefaultUserInDatabase(userId);
     store.dispatch(authenticate());
-    sessionStorage.setItem('id', userId);
+    localStorage.setItem('id', userId);
     store.dispatch(setUserId(userId));
     store.dispatch(setError(null));
     history.push('/profile');
@@ -51,6 +51,7 @@ export const signInUser = async (email, password, history) => {
   try {
     const userCredentials = await firebase.auth().signInWithEmailAndPassword(email, password);
     const userId = userCredentials.user.uid;
+    localStorage.setItem('id', userId);
     store.dispatch(setUserId(userId));
     store.dispatch(setError(null));
     history.push('/profile');
@@ -70,7 +71,7 @@ export const signOutUser = () => {
     .signOut()
     .then(() => {
       store.dispatch(deauthenticate());
-      sessionStorage.setItem('id', null);
+      localStorage.setItem('id', null);
       store.dispatch(setUserId(null));
       store.dispatch(setError(null));
     })
