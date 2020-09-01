@@ -1,0 +1,39 @@
+#conversations-table {
+  width: 300px;
+}
+
+#messages {
+  border: 1px solid #e3e1de;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto', sans-serif;
+  overflow-x: hidden;
+  padding: 5px;
+}
+
+#profile-link {
+  align-self: center;
+  text-decoration: none;
+}
+
+.receiver {
+  align-self: flex-start;
+}
+
+.sender {
+  align-self: flex-end;
+}
+
+.message {
+  border: 1px solid #e3e1de;
+  border-radius: 16px;
+  margin: 3px;
+  max-width: 50%;
+  padding: 3px;
+  word-wrap: break-word;
+}
+
+#text-field {
+  margin: 5px;
+  width: 750px;
+}
