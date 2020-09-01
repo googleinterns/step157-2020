@@ -1,0 +1,40 @@
+hr {
+  margin-left: 15%;
+  margin-right: 15%;
+  border-style: inset;
+  border-width: 1px;
+}
+
+.team-text-container {
+  padding: 0 30%;
+  margin-top: 5%;
+  text-align: center;
+  font-size: 35px;
+  font-weight: 700;
+}
+
+.teammate-container {
+  padding: 10px 30px;
+  justify-content: center;
+  width: 33%;
+  text-align: center;
+}
+
+.teammates-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 7%;
+  margin-top: 5%;
+}
+
+.user-bio {
+  margin-top: 40px;
+  font-size: 17px;
+  opacity: 0.5;
+}
+
+.user-name {
+  font-size: 25px;
+  font-weight: 300;
+}
