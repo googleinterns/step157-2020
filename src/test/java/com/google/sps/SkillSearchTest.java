@@ -11,8 +11,11 @@ import com.google.sps.servlets.SearchServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.lang.ReflectiveOperationException;
+import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,9 +25,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import java.util.Map;
-import java.lang.ReflectiveOperationException;
-import java.lang.reflect.Field;
 
 @RunWith(JUnit4.class)
 public final class SkillSearchTest {
@@ -51,7 +51,7 @@ public final class SkillSearchTest {
       Field field = env.getClass().getDeclaredField("m");
       field.setAccessible(true);
       ((Map<String, String>) field.get(env)).put("TESTING", "true");
-    } catch(ReflectiveOperationException e) {
+    } catch (ReflectiveOperationException e) {
       System.out.println(e +);
     }
   }
