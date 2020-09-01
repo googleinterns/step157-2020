@@ -22,6 +22,9 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import java.util.Map;
+import java.lang.ReflectiveOperationException;
+import java.lang.reflect.Field;
 
 @RunWith(JUnit4.class)
 public final class SkillSearchTest {
@@ -41,6 +44,16 @@ public final class SkillSearchTest {
     stringWriter = new StringWriter();
     printWriter = new PrintWriter(stringWriter);
     when(response.getWriter()).thenReturn(printWriter);
+
+    // Sets the environment variable TESTING so the test database is used
+    try {
+      Map<String, String> env = System.getenv();
+      Field field = env.getClass().getDeclaredField("m");
+      field.setAccessible(true);
+      ((Map<String, String>) field.get(env)).put("TESTING", "true");
+    } catch(ReflectiveOperationException e) {
+      System.out.println(e +);
+    }
   }
 
   @Test
