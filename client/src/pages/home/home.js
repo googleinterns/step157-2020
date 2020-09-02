@@ -10,7 +10,7 @@ const Home = () => (
       <div className="home-subtitle"> Learn, exchange, connect</div>
       <div className="home-btn-container">
         <NavLink className="home-btn btn-signup-active" activeClassName="active" exact to="/signin">Sign In</NavLink>
-        <NavLink className="home-btn btn-explore-active" activeClassName="active" exact to="/explore">Explore</NavLink>
+        <NavLink className="home-btn btn-explore-active" activeClassName="active" exact to="/search">Explore</NavLink>
       </div>
     </div>
     <div className="home-img-container">

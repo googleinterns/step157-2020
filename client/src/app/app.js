@@ -12,6 +12,7 @@ import Profile from '../features/user-profile/user-profile.js';
 import Chat from '../features/chat/chat.js';
 import SkillPage from '../pages/skill/skill-page';
 import SubskillPage from '../pages/subskill/subskill-page';
+import Search from '../pages/search/search.js';
 
 const App = () => (
   <Router>
@@ -26,6 +27,7 @@ const App = () => (
       <PrivateRoute exact path="/chat/:id?" component={Chat} />
       <Route exact path="/skills/:skillId" component={SkillPage} />
       <Route exact path="/skills/:skillId/:subskillId" component={SubskillPage} />
+      <Route exact path="/search" component={Search} />
     </Switch>
   </Router>
 );
