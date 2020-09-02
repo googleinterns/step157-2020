@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, BrowserRouter as Router, Route } from 'react-router-dom';
+import { Switch, HashRouter as Router, Route } from 'react-router-dom';
 
 import Navbar from '../components/navbar/navbar.js';
 import PrivateRoute from '../components/private-route/private-route.js';

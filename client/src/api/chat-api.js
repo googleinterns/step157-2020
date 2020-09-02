@@ -4,13 +4,14 @@ const chatsDb = firebase.database().ref('chats');
 const userMap = chatsDb.child('userMap');
 
 /**
- * Returns messages between two users in batches
+ * Returns all messages between two users
  * @param {string} senderId Id of the sender
  * @param {string} receiverId Id of the receiver
- * @param {function} callback A callback function to perform on the snapshot value
+ * @param {function} callback A callback function to perform on the snapshot value, which is
+ * an object with firebase-generated keys and message objects as values
  * @returns {void}
  */
-export const fetchChatHistory = (senderId, receiverId, callback) => {
+export const subscribeToChatMessages = (senderId, receiverId, callback) => {
   const chatId = senderId < receiverId ? `${senderId}${receiverId}` : `${receiverId}${senderId}`;
   chatsDb.child(chatId).orderByChild('timestamp').on('value', (snapshot) => {
     callback(snapshot.val());
@@ -20,10 +21,11 @@ export const fetchChatHistory = (senderId, receiverId, callback) => {
 /**
  * Returns a list of users
  * @param {string} userId Id of the user
- * @param {function} callback A callback function to perform on the snapshot value
+ * @param {function} callback A callback function to perform on the snapshot value, which
+ * is an object with firebase generated keys and userIds as values
  * @returns {void}
  */
-export const fetchConversations = (userId, callback) => {
+export const subscribeToConversationList = (userId, callback) => {
   userMap.child(`${userId}`).on('value', (snapshot) => {
     callback(snapshot.val());
   });

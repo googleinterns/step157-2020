@@ -4,7 +4,7 @@ import { setAutoFreeze } from 'immer';
 import {useImmer} from 'use-immer';
 import {useHistory} from 'react-router-dom';
 import MaterialTable from 'material-table';
-import {fetchConversations} from '../../api/chat-api.js';
+import {subscribeToConversationList} from '../../api/chat-api.js';
 import {fetchUser} from '../../api/user-api.js';
 
 setAutoFreeze(false);
@@ -19,7 +19,7 @@ const Conversations = (props) => {
 
   useEffect(() => {
     // Fetches all other users the current user has open conversations with
-    fetchConversations(id, (users) => {
+    subscribeToConversationList(id, (users) => {
       if (users !== null || undefined) {
         Object.keys(users).forEach(async (key) => {
           const userId = users[`${key}`];

@@ -33,6 +33,8 @@ const Profile = (props) => {
     }
     if (userId === id) {
       setIsOwnProfile(true);
+    } else {
+      setIsOwnProfile(false);
     }
   }, [id, params, history]);
 
