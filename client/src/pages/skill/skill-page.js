@@ -16,29 +16,38 @@ class SkillPage extends Component {
   }
 
   componentDidMount() {
-    const skillsRef = firebase.database().ref('skills');
-    skillsRef.once('value').then((snapshot) => {
-      snapshot.forEach((skill) => {
-        const skillObj = skill.val();
+    const skillsRef = firebase.database().ref('skills2');
+    skillsRef.once('value').then(snapshot => {
+      for (var key in snapshot.val()) {
+        let skillObj = snapshot.val()[key];
+        skillObj.name = key;
 
         if (skillObj.name.toLowerCase() === this.props.match.params.skillId) {
           this.setState({
-            skillData: skillObj,
+            skillData: skillObj
           });
 
-          const imgRef = firebase.storage().ref(`/images/skill_${skillObj.name.toLowerCase()}.jpg`);
-          imgRef.getDownloadURL().then((url) => {
-            this.setState({
-              imgUrl: url,
-            });
-          });
+          const imgRef = firebase.storage().ref('/images/skill_' + skillObj.name.toLowerCase() + '.jpg');
+          imgRef.getDownloadURL().then(url => {
+              this.setState({
+                imgUrl: url
+              })
+          })
         }
-      });
-    });
+      }
+    })
   }
 
   render() {
     const { skillData, imgUrl } = this.state;
+
+    let subskills = []
+ 
+      for (var key in skillData.subskills) {
+        var subskillObj = skillData.subskills[key];
+        subskillObj.name = key;
+        subskills.push(subskillObj)
+      }
 
     if (Object.keys(skillData).length === 0 && imgUrl === '') {
       return (
@@ -47,7 +56,7 @@ class SkillPage extends Component {
             <div className="explore-title">{skillData.name}</div>
             <div className="explore-subtitle">{skillData.desc}</div>
           </div>
-          <div className="subskills-container">Loading...</div>
+          <div className="subskills-container">HELLO...</div>
         </div>
       );
     }
@@ -60,7 +69,7 @@ class SkillPage extends Component {
             <div className="explore-subtitle">{skillData.desc}</div>
           </div>
           <div className="subskills-container">
-            {skillData.subskills.map((subskill) => (
+            {subskills.map((subskill) => (
               <SubskillCard category={this.props.match.params.skillId} subskill={subskill} />
             ))}
           </div>

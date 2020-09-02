@@ -17,33 +17,39 @@ class Explore extends Component {
   }
 
   componentDidMount() {
-    const skillsRef = storeSkills();
+    // const skillsRef = storeSkills();
+    const skillsRef = firebase.database().ref("skills2");
+
+    console.log(skillsRef);
 
     const skillsArr = [];
-
-    skillsRef.once('value').then((snapshot) => {
-      const promises = [];
-
-      snapshot.forEach((skill) => {
-        const obj = skill.val();
-        skillsArr.push(obj);
-
-        const imgRef = firebase.storage().ref(`/images/skill_${obj.name.toLowerCase()}.jpg`);
-
-        const promise = imgRef.getDownloadURL();
+ 
+    skillsRef.once('value').then(snapshot => {
+      let promises = [];
+ 
+      console.log(snapshot.val())
+ 
+      for (var key in snapshot.val()) {
+        let obj = snapshot.val()[key];
+        obj.name = key;
+ 
+        const imgRef = firebase.storage().ref('/images/skill_' + key.toLowerCase() + '.jpg');
+        let promise = imgRef.getDownloadURL()
         promises.push(promise);
-      });
-
+ 
+        skillsArr.push(obj);
+      }
       return Promise.all(promises);
-    }).then((results) => {
-      for (let i = 0; i < skillsArr.length; i += 1) {
+
+    }).then(results => {
+      for (let i=0; i<skillsArr.length; i++) {
         skillsArr[i].img = results[i];
       }
-
+ 
       this.setState({
-        skills: skillsArr,
-      });
-    });
+        skills: skillsArr
+      })
+    })
   }
 
   render() {

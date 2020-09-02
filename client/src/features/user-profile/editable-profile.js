@@ -7,6 +7,11 @@ import TextAreaAutosize from '@material-ui/core/TextareaAutosize';
 import TextField from '@material-ui/core/TextField';
 import {fetchUserProfileById, updateUserProfile, updateProfileState} from './user-profile-slice.js';
 import {uploadProfilePicture} from '../../api/user-api.js';
+import axios from 'axios';
+import firebase from 'firebase';
+import error from '../../components/error.js';
+import classify from './classify.js'
+
 
 /**
  * React omponent displayed when the user profile is being edited
@@ -26,6 +31,7 @@ const EditableProfile = (props) => {
 
   const history = useHistory();
   const [profilePhoto, setProfilePhoto] = useState(null);
+  const [enteredSkill, setEnteredSkill] =  useState("");
 
   /* Fetches user data on page load */
   useEffect(() => {
@@ -68,69 +74,94 @@ const EditableProfile = (props) => {
         ...userProfile, ...{photoUrl},
       },
     });
+
+    const splitEntered = enteredSkill.split(",").map(skill => skill.trim());
+
+    for (let i = 0; i < splitEntered.length; i ++) {
+      console.log(splitEntered[i]);
+      const topLevel = classify(splitEntered[i]);
+    }
+
+    await updateUserInServer({
+      id,
+      data: {
+        skillsToTeach: splitEntered,
+      },
+    });
+
     history.push('/profile');
+ 
   };
 
   return (
-    <form id="profile-form">
-      <Avatar
-        className="user-photo"
-        alt="uploaded image preview"
-        src={userProfile.photoUrl}
-        style={{width: '200px', height: '200px'}}
-      />
-      <label
-        className="user-photo"
-        htmlFor="image-upload"
-      >
-        <Button
-          variant="outlined"
-          color="primary"
-          component="span"
+    <div className='profile'>
+      <form id="profile-form">
+        <Avatar
+          className="user-photo"
+          alt="uploaded image preview"
+          src={userProfile.photoUrl}
+          style={{width: '200px', height: '200px'}}
+        />
+        <label
+          className="user-photo"
+          htmlFor="image-upload"
         >
-          Upload Profile Picture
+          <Button
+            variant="outlined"
+            color="primary"
+            component="span"
+          >
+            Upload Profile Picture
 
-        </Button>
-        <input id="image-upload" onChange={onImageUpload} type="file" name="profile picture" />
-      </label>
-      <TextField
-        label="Name"
-        variant="outlined"
-        value={userProfile.name}
-        onChange={(event) => { updateUserInState({key: 'name', value: event.target.value}); }}
-      />
-      <TextField
-        label="Age"
-        variant="outlined"
-        value={userProfile.age}
-        onChange={(event) => { updateUserInState({key: 'age', value: event.target.value}); }}
-      />
-      <TextAreaAutosize
-        rowsMin={10}
-        aria-label="user bio"
-        style={{width: '500px'}}
-        value={userProfile.bio}
-        onChange={(event) => { updateUserInState({key: 'bio', value: event.target.value}); }}
-      />
-      <div id="actions">
-        <Button
-          className="form-action"
-          variant="contained"
-          color="secondary"
-          onClick={history.goBack}
-        >
-          Cancel
-        </Button>
-        <Button
-          className="form-action"
-          variant="contained"
-          color="primary"
-          onClick={handleProfileSave}
-        >
-          Save
-        </Button>
-      </div>
-    </form>
+          </Button>
+          <input id="image-upload" onChange={onImageUpload} type="file" name="profile picture" />
+        </label>
+        <TextField
+          label="Name"
+          variant="outlined"
+          value={userProfile.name}
+          onChange={(event) => { updateUserInState({key: 'name', value: event.target.value}); }}
+        />
+        <TextField
+          label="Age"
+          variant="outlined"
+          value={userProfile.age}
+          onChange={(event) => { updateUserInState({key: 'age', value: event.target.value}); }}
+        />
+        <TextAreaAutosize
+          rowsMin={10}
+          aria-label="user bio"
+          style={{width: '500px'}}
+          value={userProfile.bio}
+          onChange={(event) => { updateUserInState({key: 'bio', value: event.target.value}); }}
+        />
+        <TextAreaAutosize
+          rowsMin={10}
+          aria-label="skills to teach"
+          style={{width: '500px'}}
+          value={enteredSkill}
+          onChange={e => setEnteredSkill(e.target.value)}
+        />
+        <div id="actions">
+          <Button
+            className="form-action"
+            variant="contained"
+            color="secondary"
+            onClick={history.goBack}
+          >
+            Cancel
+          </Button>
+          <Button
+            className="form-action"
+            variant="contained"
+            color="primary"
+            onClick={handleProfileSave}
+          >
+            Save
+          </Button>
+        </div>
+      </form>
+    </div>
   );
 };
 
