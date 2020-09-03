@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import firebase from '../../firebase';
+/* eslint-disable no-unused-vars */
 import storeSkills from '../../api/skills-api.js';
+/* eslint-enable no-unused-vars */
 
 import './explore.css';
 
@@ -17,39 +19,39 @@ class Explore extends Component {
   }
 
   componentDidMount() {
-    // const skillsRef = storeSkills();
-    const skillsRef = firebase.database().ref("skills2");
+    // const skillsRef = storeSkills(); --used when need to update categories
+    const skillsRef = firebase.database().ref('skills2');
 
     console.log(skillsRef);
 
     const skillsArr = [];
- 
-    skillsRef.once('value').then(snapshot => {
-      let promises = [];
- 
-      console.log(snapshot.val())
- 
-      for (var key in snapshot.val()) {
-        let obj = snapshot.val()[key];
-        obj.name = key;
- 
-        const imgRef = firebase.storage().ref('/images/skill_' + key.toLowerCase() + '.jpg');
-        let promise = imgRef.getDownloadURL()
-        promises.push(promise);
- 
-        skillsArr.push(obj);
-      }
-      return Promise.all(promises);
 
-    }).then(results => {
-      for (let i=0; i<skillsArr.length; i++) {
+    skillsRef.once('value').then((snapshot) => {
+      const promises = [];
+
+      console.log(snapshot.val());
+
+      // for (const key in snapshot.val()) {
+      Object.keys(snapshot.val()).forEach((key) => {
+        const obj = snapshot.val()[key];
+        obj.name = key;
+
+        const imgRef = firebase.storage().ref(`/images/skill_${key.toLowerCase()}.jpg`);
+        const promise = imgRef.getDownloadURL();
+        promises.push(promise);
+
+        skillsArr.push(obj);
+      });
+      return Promise.all(promises);
+    }).then((results) => {
+      for (let i = 0; i < skillsArr.length; i += 1) {
         skillsArr[i].img = results[i];
       }
- 
+
       this.setState({
-        skills: skillsArr
-      })
-    })
+        skills: skillsArr,
+      });
+    });
   }
 
   render() {

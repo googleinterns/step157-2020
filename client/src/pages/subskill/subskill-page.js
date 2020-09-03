@@ -75,7 +75,6 @@ class SubskillPage extends Component {
   render() {
     let { subskillData, totalTeaching, totalLearning, teachers } = this.state;
     const currSkillCategory = this.props.match.params.skillId;
-    console.log(teachers)
     
     if (Object.keys(subskillData).length === 0) {
       return (
