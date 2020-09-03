@@ -15,39 +15,41 @@ class SkillPage extends Component {
     };
   }
 
+  /* eslint-disable no-restricted-syntax */
+  /* eslint-disable guard-for-in */
   componentDidMount() {
     const skillsRef = firebase.database().ref('skills2');
-    skillsRef.once('value').then(snapshot => {
-      for (var key in snapshot.val()) {
-        let skillObj = snapshot.val()[key];
+    skillsRef.once('value').then((snapshot) => {
+      for (const key in snapshot.val()) {
+        const skillObj = snapshot.val()[key];
         skillObj.name = key;
 
         if (skillObj.name.toLowerCase() === this.props.match.params.skillId) {
           this.setState({
-            skillData: skillObj
+            skillData: skillObj,
           });
 
-          const imgRef = firebase.storage().ref('/images/skill_' + skillObj.name.toLowerCase() + '.jpg');
-          imgRef.getDownloadURL().then(url => {
-              this.setState({
-                imgUrl: url
-              })
-          })
+          const imgRef = firebase.storage().ref(`/images/skill_${skillObj.name.toLowerCase()}.jpg`);
+          imgRef.getDownloadURL().then((url) => {
+            this.setState({
+              imgUrl: url,
+            });
+          });
         }
       }
-    })
+    });
   }
 
   render() {
     const { skillData, imgUrl } = this.state;
 
-    let subskills = []
- 
-      for (var key in skillData.subskills) {
-        var subskillObj = skillData.subskills[key];
-        subskillObj.name = key;
-        subskills.push(subskillObj)
-      }
+    const subskills = [];
+
+    for (const key in skillData.subskills) {
+      const subskillObj = skillData.subskills[key];
+      subskillObj.name = key;
+      subskills.push(subskillObj);
+    }
 
     if (Object.keys(skillData).length === 0 && imgUrl === '') {
       return (

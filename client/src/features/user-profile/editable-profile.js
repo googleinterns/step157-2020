@@ -7,11 +7,7 @@ import TextAreaAutosize from '@material-ui/core/TextareaAutosize';
 import TextField from '@material-ui/core/TextField';
 import {fetchUserProfileById, updateUserProfile, updateProfileState} from './user-profile-slice.js';
 import {uploadProfilePicture} from '../../api/user-api.js';
-import axios from 'axios';
-import firebase from 'firebase';
-import error from '../../components/error.js';
-import classify from './classify.js'
-
+import classify from './classify.js';
 
 /**
  * React omponent displayed when the user profile is being edited
@@ -31,7 +27,7 @@ const EditableProfile = (props) => {
 
   const history = useHistory();
   const [profilePhoto, setProfilePhoto] = useState(null);
-  const [enteredSkill, setEnteredSkill] =  useState("");
+  const [enteredSkill, setEnteredSkill] =  useState('');
 
   /* Fetches user data on page load */
   useEffect(() => {
@@ -75,11 +71,11 @@ const EditableProfile = (props) => {
       },
     });
 
-    const splitEntered = enteredSkill.split(",").map(skill => skill.trim());
+    const splitEntered = enteredSkill.split(',').map((skill) => skill.trim());
 
-    for (let i = 0; i < splitEntered.length; i ++) {
+    for (let i = 0; i < splitEntered.length; i += 1) {
       console.log(splitEntered[i]);
-      const topLevel = classify(splitEntered[i]);
+      classify(splitEntered[i]);
     }
 
     await updateUserInServer({
@@ -90,11 +86,10 @@ const EditableProfile = (props) => {
     });
 
     history.push('/profile');
- 
   };
 
   return (
-    <div className='profile'>
+    <div className="profile">
       <form id="profile-form">
         <Avatar
           className="user-photo"
@@ -140,7 +135,7 @@ const EditableProfile = (props) => {
           aria-label="skills to teach"
           style={{width: '500px'}}
           value={enteredSkill}
-          onChange={e => setEnteredSkill(e.target.value)}
+          onChange={(e) => setEnteredSkill(e.target.value)}
         />
         <div id="actions">
           <Button
