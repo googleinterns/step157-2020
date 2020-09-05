@@ -15,11 +15,14 @@ class SkillPage extends Component {
     };
   }
 
+  /* eslint-disable no-restricted-syntax */
+  /* eslint-disable guard-for-in */
   componentDidMount() {
-    const skillsRef = firebase.database().ref('skills');
+    const skillsRef = firebase.database().ref('skills2');
     skillsRef.once('value').then((snapshot) => {
-      snapshot.forEach((skill) => {
-        const skillObj = skill.val();
+      for (const key in snapshot.val()) {
+        const skillObj = snapshot.val()[key];
+        skillObj.name = key;
 
         if (skillObj.name.toLowerCase() === this.props.match.params.skillId) {
           this.setState({
@@ -33,12 +36,20 @@ class SkillPage extends Component {
             });
           });
         }
-      });
+      }
     });
   }
 
   render() {
     const { skillData, imgUrl } = this.state;
+
+    const subskills = [];
+
+    for (const key in skillData.subskills) {
+      const subskillObj = skillData.subskills[key];
+      subskillObj.name = key;
+      subskills.push(subskillObj);
+    }
 
     if (Object.keys(skillData).length === 0 && imgUrl === '') {
       return (
@@ -47,7 +58,7 @@ class SkillPage extends Component {
             <div className="explore-title">{skillData.name}</div>
             <div className="explore-subtitle">{skillData.desc}</div>
           </div>
-          <div className="subskills-container">Loading...</div>
+          <div className="subskills-container">HELLO...</div>
         </div>
       );
     }
@@ -60,7 +71,7 @@ class SkillPage extends Component {
             <div className="explore-subtitle">{skillData.desc}</div>
           </div>
           <div className="subskills-container">
-            {skillData.subskills.map((subskill) => (
+            {subskills.map((subskill) => (
               <SubskillCard category={this.props.match.params.skillId} subskill={subskill} />
             ))}
           </div>
